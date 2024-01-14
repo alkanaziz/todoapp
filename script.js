@@ -143,7 +143,7 @@ function newTaskAdd(event) {
 
 // Delete Task Function
 function deleteTask(id) {
-  console.log(id);
+  // console.log(id);
 
   let deletedId;
   for (let index in taskList) {
@@ -175,8 +175,8 @@ function editTask(taskId, taskName) {
   inputTaskElem.focus();
   inputTaskElem.classList.add("active");
 
-  console.log("edit id", editId);
-  console.log("edit mode", isEditTask);
+  // console.log("edit id", editId);
+  // console.log("edit mode", isEditTask);
 }
 
 
@@ -191,7 +191,7 @@ btnClearElem.addEventListener("click", function () {
 // Update Status Checkbox
 function updateStatus(selectedTask) {
   // console.log(selectedTask.parentElement.lastElementChild);
-  console.log(selectedTask.nextElementSibling);
+  // console.log(selectedTask.nextElementSibling);
 
   let labelElem = selectedTask.nextElementSibling;
   let status;
