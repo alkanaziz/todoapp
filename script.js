@@ -1,19 +1,19 @@
 "use strict";
 
+let btnAddNewTaskElem = document.querySelector("#btnAddNewTask")
+let inputTaskElem = document.querySelector("#inputTask");
+let btnClearElem = document.querySelector("#btnClear");
+const filtersElem = document.querySelectorAll(".filters span");
+let editId;
+let newId;
+let isEditTask = false;
 let taskList = [];
-let idList = [];
+
 
 if (localStorage.getItem("taskList") !== null) {
   taskList = JSON.parse(localStorage.getItem("taskList"));
-  idList = taskList.map(task => task.id);
 }
 
-let btnAddNewTaskElem = document.querySelector("#btnAddNewTask")
-let inputTaskElem = document.querySelector("#inputTask");
-let editId;
-let isEditTask = false;
-let btnClearElem = document.querySelector("#btnClear");
-const filtersElem = document.querySelectorAll(".filters span");
 
 displayTasks("all");
 
@@ -112,9 +112,9 @@ function newTaskAdd(event) {
   } else {
 
     if (!isEditTask) {
+      newId = taskList.length > 0 ? taskList[taskList.length-1].id+1 : 1;
       // Einfügen: isEditTask is false as default. !isEditTask is true.
-      taskList.push({ "id": idList[idList.length - 1] + 1, "taskName": inputTaskElem.value, "status": "pending" });
-      idList = taskList.map(task => task.id);
+      taskList.push({ "id": newId, "taskName": inputTaskElem.value, "status": "pending" });
       // console.log(idList)
 
     } else {
