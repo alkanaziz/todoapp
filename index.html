@@ -31,7 +31,7 @@
         text-decoration: line-through;
       }
 
-      .controls{
+      .controls {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -47,15 +47,56 @@
         column-rule-color: #444444;
         cursor: pointer;
       }
+
+      .tracking-in-contract-bck {
+        -webkit-animation: tracking-in-contract-bck 1s
+          cubic-bezier(0.215, 0.61, 0.355, 1) both;
+        animation: tracking-in-contract-bck 1s
+          cubic-bezier(0.215, 0.61, 0.355, 1) both;
+      }
+
+      @keyframes tracking-in-contract-bck {
+        0% {
+          letter-spacing: 1em;
+          -webkit-transform: translateZ(400px);
+          transform: translateZ(400px);
+          opacity: 0;
+        }
+        40% {
+          opacity: 0.6;
+        }
+        100% {
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          opacity: 1;
+        }
+      }
+
+      .blur-out-contract {
+        -webkit-animation: blur-out-contract 1s
+          cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+        animation: blur-out-contract 1s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+          both;
+      }
+
+      @keyframes blur-out-contract {
+        0% {
+          -webkit-filter: blur(0.01);
+          filter: blur(0.01);
+        }
+        100% {
+          letter-spacing: -0.5em;
+          -webkit-filter: blur(12px) opacity(0%);
+          filter: blur(12px) opacity(0%);
+        }
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="row col-12 m-auto">
         <div class="card mt-3">
-          <h1 class="card-header m-auto">
-            Todo App
-          </h1>
+          <h1 class="card-header m-auto">Todo App</h1>
           <div class="card-body">
             <form>
               <div class="input-group">
@@ -83,9 +124,7 @@
               Alle Löschen
             </button>
           </div>
-          <ul id="task-list" class="list-group list-group-flush">
-            
-          </ul>
+          <ul id="task-list" class="list-group list-group-flush"></ul>
         </div>
       </div>
     </div>

@@ -112,7 +112,7 @@ function newTaskAdd(event) {
   } else {
 
     if (!isEditTask) {
-      newId = taskList.length > 0 ? taskList[taskList.length-1].id+1 : 1;
+      newId = taskList.length > 0 ? taskList[taskList.length - 1].id + 1 : 1;
       // Einfügen: isEditTask is false as default. !isEditTask is true.
       taskList.push({ "id": newId, "taskName": inputTaskElem.value, "status": "pending" });
       // console.log(idList)
@@ -132,6 +132,7 @@ function newTaskAdd(event) {
     inputTaskElem.value = "";
     displayTasks(document.querySelector("span.active").id);
     localStorage.setItem("taskList", JSON.stringify(taskList));
+    document.getElementById(newId).nextElementSibling.classList.add("tracking-in-contract-bck");
   }
 
 
@@ -160,9 +161,14 @@ function deleteTask(id) {
   // Arrow Function
   // deletedId = taskList.findIndex(task => task.id == id);
 
-  taskList.splice(deletedId, 1);
-  displayTasks(document.querySelector("span.active").id);
-  localStorage.setItem("taskList", JSON.stringify(taskList));
+  // Animation Class Add
+  document.getElementById(taskList[deletedId].id).parentElement.parentElement.classList.add("blur-out-contract");
+  
+  setTimeout(function () {
+    taskList.splice(deletedId, 1);
+    displayTasks(document.querySelector("span.active").id);
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+  }, 700);
 }
 
 
@@ -181,11 +187,20 @@ function editTask(taskId, taskName) {
 
 
 // Delete all tasks function
+// Animation for deleting all tasks
 btnClearElem.addEventListener("click", function () {
-  // console.log("click event: task clear");
-  taskList.splice(0, taskList.length);
-  localStorage.setItem("taskList", JSON.stringify(taskList));
-  displayTasks();
+  let tasks = document.querySelectorAll(".task");
+  tasks.forEach(function(task) {
+    task.classList.add("blur-out-contract");
+  });
+
+  setTimeout(function () {
+    // console.log("click event: task clear");
+    taskList.splice(0, taskList.length);
+    localStorage.setItem("taskList", JSON.stringify(taskList));
+    displayTasks();
+    
+  }, 700);
 });
 
 // Update Status Checkbox
